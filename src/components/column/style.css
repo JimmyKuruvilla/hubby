@@ -1,0 +1,21 @@
+.column {
+  height: calc(100% - 20px);
+  width: 300px;
+  display: flex;
+  flex: 0 0 auto;
+  flex-flow: column nowrap;
+  overflow: auto;
+  background-color: #ece9e9;
+
+  border: 1px solid grey;
+  border-radius: 3px;
+  margin: 10px 20px 0 0;
+  padding: 10px 10px;
+}
+
+.title {
+  font-size: 1.4em;
+  text-transform: capitalize;
+  border-bottom: 1px solid grey;
+  margin-bottom: 20px;
+}
