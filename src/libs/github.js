@@ -1,7 +1,7 @@
 import { TOKEN } from './secrets';
 
 //how ot make sure we have all comments/issues/whatvers?
-const queries ={
+const queries = {
   test: `{repository(owner:"RMSone", name:"miu-insights") {
     issues(last:100, states:OPEN) {
       edges {
@@ -10,6 +10,12 @@ const queries ={
           url
           id
           number
+          assignees(first: 5){
+            nodes{
+              avatarUrl
+              name
+            }
+          }
           comments(first:30){
             edges{
               node{
@@ -33,7 +39,7 @@ const queries ={
       }
     }
   }}`
-}
+};
 export async function gh() {
   const githubGraphQL = 'https://api.github.com/graphql';
   const jsonEndpoint =

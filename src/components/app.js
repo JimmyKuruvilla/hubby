@@ -7,6 +7,10 @@ import Header from './header';
 import Board from '../routes/board';
 import Settings from '../routes/settings';
 
+import { Registry, l } from '../libs/registry';
+
+Registry.init();
+Registry.set(l.dnd, new Map());
 export default class App extends Component {
   handleRoute = e => {
     this.currentUrl = e.url;

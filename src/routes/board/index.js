@@ -37,6 +37,7 @@ export default class Board extends Component {
         number: e.node.number,
         title: e.node.title,
         url: e.node.url,
+        assignees: e.node.assignees.nodes,
         comments: e.node.comments.edges.map(e => e.node),
         allLabels: labels,
         displayLabels: labels.filter(_ => !columns.has(_.name)),
