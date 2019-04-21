@@ -1,13 +1,11 @@
 .topdropzone {
-  height: 0px;
-  transition: height 200ms;
+  height: 20px;
 }
 
 .topdropzoneactive {
   height: 20px;
-  transition: height 200ms;
-  background: green;
-  margin-bottom: -10px;
+  border: 1px dashed white;
+  background-color: #673AB7;
 }
 
 .issue {

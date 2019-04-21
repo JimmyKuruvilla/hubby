@@ -1,6 +1,6 @@
 import { h, Component } from 'preact';
 import style from './style';
-import { gh } from '../../libs/github';
+import { gh, repos, queries } from '../../libs/github/index';
 import Column from '../../components/column';
 const COLUMNS = {
   backlog: 'backlog'
@@ -25,8 +25,8 @@ export default class Board extends Component {
       ['closed', []]
     ]);
 
-    const res = await gh();
-    const issues = res.data.repository.issues.edges.map(e => {
+    const repoInitQuery = await gh(queries(repos.insights).init);
+    const issues = repoInitQuery.data.repository.issues.edges.map(e => {
       const labels = e.node.labels.edges.map(e => ({
         name: e.node.name,
         color: 'green'

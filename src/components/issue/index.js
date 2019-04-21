@@ -1,7 +1,8 @@
 import { h, Component } from 'preact';
 import style from './style';
-import  { Registry, l } from '../../libs/registry';
-
+import  { Registry } from '../../libs/registry';
+import { GitHubService } from '../../libs/github';
+import { DragAndDropService} from '../../libs/dragAndDrop'
 export default class Issue extends Component {
   constructor(props) {
     super(props);
@@ -11,10 +12,10 @@ export default class Issue extends Component {
     }));
     this.setState({ labels, issue: props.issue, topDropZoneActive: false });
 
-    this._dnd = Registry.get(l.dnd);
+    this._dnd = Registry.get(DragAndDropService.name);
+    this._githubService = Registry.get(GitHubService.name);
     this.id = props.issue.number;
-    console.log(props)
-    this._dnd.set(this.id, {issue: props.issue})
+    this._dnd.set(this.id, props.issue)
   }
 
   getData(ev) {
@@ -40,6 +41,7 @@ export default class Issue extends Component {
       topDropZoneActive: false
     })
     const issueData = this.getData(ev);
+    console.log('topdrop', issueData.allLabels, issueData.columnName);
   }
 
   topDropZoneDragLeaveHandler = (ev) => {
@@ -69,16 +71,16 @@ export default class Issue extends Component {
     this.setState({
       topDropZoneActive: false
     })
-    const issueData = this.getData(ev);
-    console.log('bottom');
+    const dragged = this.getData(ev);
+    const droppedOn = this.state.issue;
+    console.log('bottomdrop',dragged);
+    console.log(droppedOn)
   }
 
   render() {
     return (
-      <div class="i">
-        < div className = {
-          this.state.topDropZoneActive ? style.topdropzoneactive : style.topdropzone
-        }
+      <div>
+        <div className={this.state.topDropZoneActive ? style.topdropzoneactive : style.topdropzone}
           onDrop={this.topDropZoneDropHandler} 
           onDragOver={this.topDropZoneDragOverHandler}
           onDragLeave={this.topDropZoneDragLeaveHandler}

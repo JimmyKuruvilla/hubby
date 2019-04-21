@@ -6,11 +6,10 @@ import Header from './header';
 // Code-splitting is automated for routes
 import Board from '../routes/board';
 import Settings from '../routes/settings';
+import { Wiring } from '../libs/wiring'
 
-import { Registry, l } from '../libs/registry';
+Wiring.init();
 
-Registry.init();
-Registry.set(l.dnd, new Map());
 export default class App extends Component {
   handleRoute = e => {
     this.currentUrl = e.url;
